@@ -1,0 +1,10 @@
+{
+    "mensagemErroLogin": "Usuário ou senha inválido.\nTente novamente ou verifique suas informações!",
+    "messageErroEmail": "Formato inválido",
+    "messageErroSenha":"As senhas não são iguais.\n",
+    "messageBemVindoAoBanco":"bem vindo ao BugBank :)",
+    "messageContaInvalida": "Conta inválida ou inexistente",
+    "messageSemSaldo": "Você não tem saldo suficiente para essa transação",
+    "messagemTransferencia": "Transferencia realizada com sucesso",
+    "descricaoTransferencia": "Pagamento do curso"
+  }
