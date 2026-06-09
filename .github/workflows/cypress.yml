@@ -1,0 +1,45 @@
+name: Tests Bugbank
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Instalar Allure CLI
+        run: npm install -g allure-commandline
+
+      - name: Rodar testes Cypress
+        run: npm run cy:allure
+        env:
+          CYPRESS_allure: true
+
+      - name: Gerar relatório Allure
+        if: always()
+        run: allure generate allure-results --clean -o allure-report
+
+      - name: Publicar no GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          publish_branch: gh-pages
